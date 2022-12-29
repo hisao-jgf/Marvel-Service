@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import MarvelServices from '../../services/MarvelServices';
+import Spinner from '../spinner/Spinner';
 
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
@@ -11,50 +12,32 @@ class RandomChar extends Component {
     }
 
     state = {
-        name: null,
-        description: null,
-        thumbnail: null,
-        homepage: null,
-        wiki: null
+        char: {},
+        loading: true,
     }
     marvelServices = new MarvelServices();
+
+    onCharacterLoaded = (char) => {
+        this.setState({
+            char,
+            loading: false
+        })
+    }
 
     updateCharacter = () => {
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
 
         this.marvelServices
             .getCharacter(id)
-            .then(res => {
-                this.setState(res);
-            })
+            .then(this.onCharacterLoaded)
     }
 
     render() {
-        const { name, description, thumbnail, homepage, wiki } = this.state;
-        let imgStyle = {'objectFit': 'cover'};
-        if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
-            imgStyle = {'objectFit': 'unset'};
-        }
+        const { char, loading } = this.state;
         
         return (
             <div className="randomchar">
-                <div className="randomchar__block">
-                    <img src={thumbnail} alt="Random character" className="randomchar__img" style={imgStyle}/>
-                    <div className="randomchar__info">
-                        <p className="randomchar__name">{name}</p>
-                        <p className="randomchar__descr">
-                            {description}
-                        </p>
-                        <div className="randomchar__btns">
-                            <a href={homepage} className="button button__main">
-                                <div className="inner">homepage</div>
-                            </a>
-                            <a href={wiki} className="button button__secondary">
-                                <div className="inner">Wiki</div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {loading ? <Spinner /> : <View character={char}/>}
                 <div className="randomchar__static">
                     <p className="randomchar__title">
                         Random character for today!<br/>
@@ -70,8 +53,36 @@ class RandomChar extends Component {
                 </div>
             </div>
         )
+    }  
+}
+
+const View = ({character}) => {
+    const {name, description, thumbnail, homepage, wiki} = character;
+
+    let imgStyle = {'objectFit': 'cover'};
+    if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
+        imgStyle = {'objectFit': 'unset'};
     }
-    
+
+    return (
+        <div className="randomchar__block">
+            <img src={thumbnail} alt="Random character" className="randomchar__img" style={imgStyle}/>
+            <div className="randomchar__info">
+                <p className="randomchar__name">{name}</p>
+                <p className="randomchar__descr">
+                    {description}
+                </p>
+                <div className="randomchar__btns">
+                    <a href={homepage} className="button button__main">
+                        <div className="inner">homepage</div>
+                    </a>
+                    <a href={wiki} className="button button__secondary">
+                        <div className="inner">Wiki</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default RandomChar;
