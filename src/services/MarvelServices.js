@@ -10,11 +10,11 @@ class MarvelServices {
         return await getResult.json();
     };
 
-    getAllCharacters = () => {
-        return this.getResources(`${this._apiBase}characters/?limit=9&offset=210&apikey=${this._apiKey}`)
+    getAllCharacters = async () => {
+        return await this.getResources(`${this._apiBase}characters?limit=9&offset=210&apikey=${this._apiKey}`)
     }
-    getCharacter = (id) => {
-        return this.getResources(`${this._apiBase}characters/${id}?apikey=${this._apiKey}`);
+    getCharacter = async (id) => {
+        return await this.getResources(`${this._apiBase}characters/${id}?apikey=${this._apiKey}`);
     }
 }
 
