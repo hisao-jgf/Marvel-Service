@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import MarvelServices from '../../services/MarvelServices';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -46,7 +47,10 @@ class CharList extends Component {
             }
 
             return (
-                <li className="char__item" key={id}>
+                <li 
+                    className="char__item" 
+                    key={id}
+                    onClick={() => this.props.onCharacterSelected(id)}>
                     <img src={thumbnail} alt={name} style={imgStyle}/>
                     <div className="char__name">{name}</div>
                 </li>
