@@ -3,6 +3,7 @@ import { Component } from 'react';
 import MarvelServices from '../../services/MarvelServices';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
+import Skeleton from '../skeleton/Skeleton';
 
 import './charInfo.scss';
 
@@ -58,12 +59,14 @@ class CharInfo extends Component {
     render() {
         const { char, loading, error } = this.state;
 
+        const skeleton = char || loading || error ? null : <Skeleton />;
         const errorMessage = error ? <ErrorMessage /> : null;
         const spinner = loading ? <Spinner /> : null;
         const viewContent = !(loading || error || !char ) ? <View character={char} /> : null;
 
         return (
             <div className="char__info">
+                {skeleton}
                 {errorMessage}
                 {spinner}
                 {viewContent}
@@ -103,8 +106,10 @@ const View = ({character}) => {
             
             <div className="char__comics">Comics:</div>
             <ul className="char__comics-list">
+                {comics.length === 0 ? 'There are no comics this character has been in.' : null}
                 {
                     comics.map((item, index) => {
+                        if (index >= 10) return;
                         return (
                             <li className="char__comics-item"
                                 key={index}>
