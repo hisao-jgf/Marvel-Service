@@ -58,17 +58,15 @@ class CharList extends Component {
         })
     }
 
-    render() {
-        const {charList, error, loading, newCharsLoading, offset, charListEnded} = this.state;
-
-        const characters = charList.map(char => {
+    renderCharacters(characterList) {
+        const characters = characterList.map(char => {
             const {id, name, thumbnail} = char;
-
+    
             let imgStyle = {'objectFit': 'cover'};
             if (char.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
                 imgStyle = {'objectFit': 'unset'};
             }
-
+    
             return (
                 <li 
                     className="char__item" 
@@ -79,10 +77,22 @@ class CharList extends Component {
                 </li>
             )
         })
+    
+        return (
+            <>
+                {characters}
+            </>
+        )
+    }
+
+    render() {
+        const {charList, error, loading, newCharsLoading, offset, charListEnded} = this.state;
+
+        const renderedChars = this.renderCharacters(charList);
 
         const errorMessage = error ? <ErrorMessage /> : null;
         const spinner = loading ? <Spinner /> : null;
-        const viewContent = !(loading || error) ? characters : null;
+        const viewContent = !(loading || error) ? renderedChars : null;
 
         return (
             <div className="char__list">
