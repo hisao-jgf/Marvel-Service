@@ -79,9 +79,9 @@ class CharList extends Component {
         })
     
         return (
-            <>
+            <ul className="char__grid">
                 {characters}
-            </>
+            </ul>
         )
     }
 
@@ -96,11 +96,9 @@ class CharList extends Component {
 
         return (
             <div className="char__list">
-                <ul className="char__grid">
-                    {errorMessage}
-                    {spinner}
-                    {viewContent}
-                </ul>
+                {errorMessage}
+                {spinner}
+                {viewContent}
                 <button 
                     className="button button__main button__long"
                     disabled={newCharsLoading}
