@@ -64,9 +64,10 @@ class CharList extends Component {
         this.charRefs.push(ref);
     }
 
-    onCharacterSelectedRef = (index) => {
+    onCharacterSelectedFocus = (index) => {
         this.charRefs.forEach(char => char.classList.remove('char__item_selected'));
         this.charRefs[index].classList.add('char__item_selected');
+        this.charRefs[index].focus();
     }
 
     renderCharacters(characterList) {
@@ -81,11 +82,18 @@ class CharList extends Component {
             return (
                 <li 
                     className="char__item" 
+                    tabIndex={0}
                     key={id}
                     ref={this.setCharacterRef}
                     onClick={() => {
                         this.props.onCharacterSelected(id);
-                        this.onCharacterSelectedRef(index);
+                        this.onCharacterSelectedFocus(index);
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === ' ' || e.key === 'Enter') {
+                            this.props.onCharacterSelected(id);
+                            this.onCharacterSelectedFocus(index);
+                        }
                     }}>
                     <img src={thumbnail} alt={name} style={imgStyle}/>
                     <div className="char__name">{name}</div>
