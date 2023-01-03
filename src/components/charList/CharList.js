@@ -16,6 +16,8 @@ class CharList extends Component {
         offset: 210,
         charListEnded: false
     }
+    charRefs = [];
+
     marvelServices = new MarvelServices();
 
     componentDidMount() {
@@ -58,12 +60,21 @@ class CharList extends Component {
         })
     }
 
+    setCharacterRef = (ref) => {
+        this.charRefs.push(ref);
+    }
+
+    onCharacterSelectedRef = (index) => {
+        this.charRefs.forEach(char => char.classList.remove('char__item_selected'));
+        this.charRefs[index].classList.add('char__item_selected');
+    }
+
     renderCharacters(characterList) {
-        const characters = characterList.map(char => {
+        const characters = characterList.map((char, index) => {
             const {id, name, thumbnail} = char;
     
             let imgStyle = {'objectFit': 'cover'};
-            if (char.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
+            if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' || 'http://i.annihil.us/u/prod/marvel/i/mg/f/60/4c002e0305708.gif') {
                 imgStyle = {'objectFit': 'unset'};
             }
     
@@ -71,7 +82,11 @@ class CharList extends Component {
                 <li 
                     className="char__item" 
                     key={id}
-                    onClick={() => this.props.onCharacterSelected(id)}>
+                    ref={this.setCharacterRef}
+                    onClick={() => {
+                        this.props.onCharacterSelected(id);
+                        this.onCharacterSelectedRef(index);
+                    }}>
                     <img src={thumbnail} alt={name} style={imgStyle}/>
                     <div className="char__name">{name}</div>
                 </li>
