@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# HisaoJGF's Marvel Information Portal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+(This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app))
 
-## Available Scripts
+### **In order to use the application, please register on the Marvel API website: https://developer.marvel.com**
+\
+**Please install [Node.js](https://nodejs.org/en/) on your local machine before following up with the steps below.**
 
-In the project directory, you can run:
+---
 
-### `yarn start`
+### If you want to create new version, redesign or modify this application, please follow the guidelines:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Please, download or fork the source code to your PC / Account by pressing either:
+    1. **"Fork"** button below the header of the GitHub page, which will automatically add the copy of current repository to your GitHub account, without affecting the original repository with changes you may add to the copy.  
+    You may also find the **instructions** on how to connect your local machine repository with the remote one: [GitHub: Working with repositories](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories),  
+    and then pull the files from the latter: [GitHub: Getting changes](https://docs.github.com/en/get-started/using-git/getting-changes-from-a-remote-repository)  
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+    2. **"<> Code"** button above the repository source files, and then selecting **"Download ZIP"**, which will download the *'.zip'* archive with all of the required files to your **Downloads** folder. Then put the files into the designated folder.  
 
-### `yarn test`
+2.  Open the ***.env_example*** file, and change *"Your Marvel API key here.."* to the **public** key of your personal account, which you can find at: **https://developer.marvel.com/account**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Close and rename it to ***.env***
 
-### `yarn build`
+4. Type **npm install** into the terminal of [VS Code](https://code.visualstudio.com/)  ( you can open it by pressing Ctrl / Cmd + ` ) to install all of the dependencies packages required to run the application
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. You're ready to use the application by launching it ( type **npm start** in the terminal ) on your localhost domain! :)  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+*(Please make sure you do have __\*.__ characters typed into the **"Authorized referrers"** field, to ensure that API calls from your localhost domain are allowed.)*
 
-### `yarn eject`
+**If something goes wrong**, *( an error appears in the terminal e.g. )* **please, follow up with searching for the solution in the internet.**  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+*Since the list of possible errors on different operating systems (Windows, MacOS, Linux) could be reasonably long, there was no resolution provided to any error encountering.* 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### ***Please enjoy the project!***  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+\
+/ -- HisaoJGF -- /
