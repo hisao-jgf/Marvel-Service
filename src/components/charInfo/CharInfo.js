@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import MarvelServices from '../../services/MarvelServices';
@@ -8,79 +8,64 @@ import Skeleton from '../skeleton/Skeleton';
 
 import './charInfo.scss';
 
-class CharInfo extends Component {
-    state = {
-        char: null,
-        loading: false,
-        error: false
-    }
-    marvelServices = new MarvelServices();
+const CharInfo = (props) => {
+    const [char, setChar] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    
+    const marvelServices = new MarvelServices();
 
-    componentDidMount() {
-        this.updateCharacter();
-    }
-    componentDidUpdate(prevProps) {
-        if (this.props.characterId !== prevProps.characterId) {
-            this.updateCharacter();
-        }
-    }
+    useEffect(() => {
+        updateCharacter();
+    }, [props.characterId]);
 
-    onCharacterLoaded = (char) => {
-        this.setState({
-            char,
-            loading: false,
-        })
-    }
-    onCharacterLoading = () => {
-        this.setState({
-            loading: true,
-            error: false
-        })
-    }
-    onCharacterLoadError = () => {
-        this.setState({
-            loading: false,
-            error: true
-        })
+    const onCharacterLoaded = (char) => {
+        setChar(char);
+        setLoading(false);
     }
 
-    updateCharacter = () => {
-        const {characterId} = this.props;
+    const onCharacterLoading = () => {
+        setLoading(true);
+        setError(false);
+    }
+
+    const onCharacterLoadError = () => {
+        setLoading(false);
+        setError(true);
+    }
+
+    const updateCharacter = () => {
+        const {characterId} = props;
         if (!characterId) {
             return;
         }
 
-        this.onCharacterLoading();
-        this.marvelServices
-            .getCharacter(characterId)
-            .then(this.onCharacterLoaded)
-            .catch(this.onCharacterLoadError)
+        onCharacterLoading();
+        marvelServices.getCharacter(characterId)
+            .then(onCharacterLoaded)
+            .catch(onCharacterLoadError)
     }
 
-    render() {
-        const { char, loading, error } = this.state;
+    const skeleton = char || loading || error ? null : <Skeleton />;
+    const errorMessage = error ? <ErrorMessage /> : null;
+    const spinner = loading ? <Spinner /> : null;
+    const viewContent = !(loading || error || !char ) ? <View character={char} /> : null;
 
-        const skeleton = char || loading || error ? null : <Skeleton />;
-        const errorMessage = error ? <ErrorMessage /> : null;
-        const spinner = loading ? <Spinner /> : null;
-        const viewContent = !(loading || error || !char ) ? <View character={char} /> : null;
-
-        return (
-            <div className="char__info">
-                {skeleton}
-                {errorMessage}
-                {spinner}
-                {viewContent}
-            </div>
-        )
-    }
+    return (
+        <div className="char__info">
+            {skeleton}
+            {errorMessage}
+            {spinner}
+            {viewContent}
+        </div>
+    )
 }
 
 const View = ({character}) => {
     const {name, description, thumbnail, homepage, wiki, comics} = character;
 
     let imgStyle = {'objectFit': 'cover'};
-    if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
+    if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' || 'http://i.annihil.us/u/prod/marvel/i/mg/f/60/4c002e0305708.gif') {
         imgStyle = {'objectFit': 'unset'};
     }
 
