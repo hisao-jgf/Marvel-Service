@@ -31,7 +31,7 @@ const CharList = (props) => {
     }
 
     const onCharacterListLoading = () => {
-        setNewCharsLoading(newCharsLoading => true);
+        setNewCharsLoading(true);
     }
 
     const onCharacterListLoaded = (newCharList) => {
@@ -41,15 +41,15 @@ const CharList = (props) => {
         }
 
         setCharList(charList => [...charList, ...newCharList]);
-        setLoading(loading => false);
-        setNewCharsLoading(newCharsLoading => false);
+        setLoading(false);
+        setNewCharsLoading(false);
         setOffset(offset => offset + 9);
-        setCharListEnded(charListEnded => listEnded);
+        setCharListEnded(listEnded);
     }
 
     const onCharacterListLoadError = () => {
-        setLoading(loading => false);
-        setError(error => true);
+        setLoading(false);
+        setError(true);
     }
 
     const onCharacterSelectedFocus = (index) => {
