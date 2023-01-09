@@ -9,29 +9,22 @@ import './charList.scss';
 
 const CharList = (props) => {
     const [charList, setCharList] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
     const [newCharsLoading, setNewCharsLoading] = useState(false);
     const [offset, setOffset] = useState(210);
     const [charListEnded, setCharListEnded] = useState(false);
     
     const charRefs = useRef([]);
 
-    const marvelServices = useMarvelServices();
+    const {loading, error, getAllCharacters} = useMarvelServices();
 
     useEffect(() => {
         onCharacterListLoadRequest();
     }, []);
 
     const onCharacterListLoadRequest = (offset) => {
-        onCharacterListLoading();   
-        marvelServices.getAllCharacters(offset)
-            .then(onCharacterListLoaded)
-            .catch(onCharacterListLoadError)
-    }
-
-    const onCharacterListLoading = () => {
-        setNewCharsLoading(true);
+        setNewCharsLoading(true);   
+        getAllCharacters(offset)
+            .then(onCharacterListLoaded);
     }
 
     const onCharacterListLoaded = (newCharList) => {
@@ -41,15 +34,9 @@ const CharList = (props) => {
         }
 
         setCharList(charList => [...charList, ...newCharList]);
-        setLoading(false);
         setNewCharsLoading(false);
         setOffset(offset => offset + 9);
         setCharListEnded(listEnded);
-    }
-
-    const onCharacterListLoadError = () => {
-        setLoading(false);
-        setError(true);
     }
 
     const onCharacterSelectedFocus = (index) => {
