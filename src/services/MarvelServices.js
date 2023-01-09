@@ -1,7 +1,7 @@
 import useRequest from '../hooks/request.hook';
 
 const useMarvelServices = () => {
-    const {request} = useRequest();
+    const {loading, error, removeError, request} = useRequest();
 
     const _apiKey = process.env.REACT_APP_API_KEY;
     const _apiBase = 'https://gateway.marvel.com:443/v1/public/';
@@ -28,7 +28,7 @@ const useMarvelServices = () => {
         return _transformCharacterData(result.data.results[0]);
     }
 
-    return {request, getCharacter, getAllCharacters};
+    return {loading, error, removeError, request, getCharacter, getAllCharacters};
 }
 
 export default useMarvelServices;
