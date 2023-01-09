@@ -9,11 +9,8 @@ import Skeleton from '../skeleton/Skeleton';
 import './charInfo.scss';
 
 const CharInfo = (props) => {
-    const [char, setChar] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-    
-    const marvelServices = useMarvelServices();
+    const [char, setChar] = useState(null);  
+    const {loading, error, removeError, getCharacter} = useMarvelServices();
 
     useEffect(() => {
         updateCharacter();
@@ -21,17 +18,6 @@ const CharInfo = (props) => {
 
     const onCharacterLoaded = (char) => {
         setChar(char);
-        setLoading(false);
-    }
-
-    const onCharacterLoading = () => {
-        setLoading(true);
-        setError(false);
-    }
-
-    const onCharacterLoadError = () => {
-        setLoading(false);
-        setError(true);
     }
 
     const updateCharacter = () => {
@@ -40,10 +26,9 @@ const CharInfo = (props) => {
             return;
         }
 
-        onCharacterLoading();
-        marvelServices.getCharacter(characterId)
-            .then(onCharacterLoaded)
-            .catch(onCharacterLoadError)
+        removeError();
+        getCharacter(characterId)
+            .then(onCharacterLoaded);
     }
 
     const skeleton = char || loading || error ? null : <Skeleton />;
