@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import MarvelServices from '../../services/MarvelServices';
+import useMarvelServices from '../../services/MarvelServices';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
@@ -12,7 +12,7 @@ const RandomChar = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     
-    const marvelServices = new MarvelServices();
+    const marvelServices = useMarvelServices();
 
     useEffect(() => {
         updateCharacter();

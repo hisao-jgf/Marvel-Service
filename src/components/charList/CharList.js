@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import MarvelServices from '../../services/MarvelServices';
+import useMarvelServices from '../../services/MarvelServices';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
@@ -17,7 +17,7 @@ const CharList = (props) => {
     
     const charRefs = useRef([]);
 
-    const marvelServices = new MarvelServices();
+    const marvelServices = useMarvelServices();
 
     useEffect(() => {
         onCharacterListLoadRequest();
