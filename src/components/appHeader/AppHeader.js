@@ -25,7 +25,6 @@ const AppHeader = () => {
                     /
                     <li>
                         <NavLink
-                            exact
                             to="/comics"
                             activeStyle={{
                                 color: '#9F0013'
