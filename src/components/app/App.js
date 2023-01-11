@@ -10,6 +10,7 @@ import CharInfo from "../charInfo/CharInfo";
 
 import AppBanner from '../appBanner/AppBanner';
 import ComicsList from '../comicsList/ComicsList';
+import SingleComic from '../singleComic/SingleComic';
 
 import decoration from '../../resources/img/vision.png';
 
@@ -45,6 +46,10 @@ const App = () => {
                         <Route exact path="/comics">
                             <AppBanner />
                             <ComicsList />
+                        </Route>
+
+                        <Route path="/comics/:comicId">
+                            <SingleComic />
                         </Route>
 
                         <Route path="*">
