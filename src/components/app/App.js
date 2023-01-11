@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ErrorBoundary from '../errorBoundary/ErrorBoundary';
+import Page404 from '../errorPage/404';
 
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
@@ -44,6 +45,10 @@ const App = () => {
                         <Route exact path="/comics">
                             <AppBanner />
                             <ComicsList />
+                        </Route>
+
+                        <Route path="*">
+                            <Page404 />
                         </Route>
                     </Switch>
                 </main>
