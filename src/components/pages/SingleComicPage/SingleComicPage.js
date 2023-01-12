@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-import useMarvelServices from '../../services/MarvelServices';
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
+import useMarvelServices from '../../../services/MarvelServices';
+import Spinner from '../../spinner/Spinner';
+import ErrorMessage from '../../errorMessage/ErrorMessage';
 
-import './singleComic.scss';
+import './singleComicPage.scss';
 
-const SingleComic = () => {
+const SingleComicPage = () => {
     const {comicId} = useParams();
     const [comic, setComic] = useState({});
 
@@ -58,4 +58,4 @@ const SingleComic = () => {
     )
 }
 
-export default SingleComic;
+export default SingleComicPage;
