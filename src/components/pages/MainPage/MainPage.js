@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ErrorBoundary from '../../errorBoundary/ErrorBoundary';
+import ArrowUp from '../../arrowUp/ArrowUp';
 
 import RandomChar from '../../randomChar/RandomChar';
 import CharList from '../../charList/CharList';
@@ -29,6 +30,7 @@ const MainPage = () => {
                 </ErrorBoundary>
             </div>
             <img className="bg-decoration" src={decoration} alt="vision"/>
+            <ArrowUp />
         </>
     )
 }
