@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import AppBanner from '../../appBanner/AppBanner';
+
 import useMarvelServices from '../../../services/MarvelServices';
 import Spinner from '../../spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
@@ -51,6 +53,7 @@ const SingleComicPage = () => {
 
     return (
         <>
+            <AppBanner />
             {errorMessage}
             {spinner}
             {viewContent}
