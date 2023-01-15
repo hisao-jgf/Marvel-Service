@@ -5,6 +5,7 @@ import ArrowUp from '../../arrowUp/ArrowUp';
 import RandomChar from '../../randomChar/RandomChar';
 import CharList from '../../charList/CharList';
 import CharInfo from '../../charInfo/CharInfo';
+import CharSearchForm from '../../charSearchForm/CharSearchForm';
 
 import decoration from '../../../resources/img/vision.png';
 
@@ -25,9 +26,14 @@ const MainPage = () => {
                     <CharList onCharacterSelected={onCharacterSelected} />
                 </ErrorBoundary>
                 
-                <ErrorBoundary>
-                    <CharInfo characterId={selectedCharacter} />
-                </ErrorBoundary>
+                <div>
+                    <ErrorBoundary>
+                        <CharInfo characterId={selectedCharacter} />
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <CharSearchForm/>
+                    </ErrorBoundary>
+                </div>
             </div>
             <img className="bg-decoration" src={decoration} alt="vision"/>
             <ArrowUp />
