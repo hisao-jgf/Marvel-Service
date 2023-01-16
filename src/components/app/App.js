@@ -6,8 +6,9 @@ import AppHeader from "../appHeader/AppHeader";
 
 const MainPage = lazy(() => import('../pages/MainPage/MainPage'));
 const ComicsPage = lazy(() => import('../pages/ComicsPage/ComicsPage'));
-const SingleComicPage = lazy(() => import('../pages/SingleComicPage/SingleComicPage'));
-const SingleCharacterPage = lazy(() => import('../pages/SingleCharacterPage/SingleCharacterPage'));
+const SingleComicLayout = lazy(() => import('../pages/SingleComicLayout/SingleComicLayout'));
+const SingleCharacterLayout = lazy(() => import('../pages/SingleCharacterLayout/SingleCharacterLayout'));
+const SinglePage = lazy(() => import('../pages/SinglePage/SinglePage'));
 const Page404 = lazy(() => import('../pages/Error404Page/404'));
 
 const App = () => {
@@ -27,11 +28,11 @@ const App = () => {
                                 <ComicsPage />
                             </Route>
 
-                            <Route exact path="/comics/:comicId">
-                                <SingleComicPage />
+                            <Route exact path="/comics/:id">
+                                <SinglePage Component={SingleComicLayout} dataType="comic"/>
                             </Route>
-                            <Route exact path="/characters/:charId">
-                                <SingleCharacterPage />
+                            <Route exact path="/characters/:id">
+                                <SinglePage Component={SingleCharacterLayout} dataType="character"/>
                             </Route>
 
                             <Route path="*">
