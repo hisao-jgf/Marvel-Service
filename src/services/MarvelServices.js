@@ -1,7 +1,7 @@
 import useRequest from '../hooks/request.hook';
 
 const useMarvelServices = () => {
-    const {loading, error, removeError, request} = useRequest();
+    const {removeError, request, stateProcess, setStateProcess} = useRequest();
 
     const _apiKey = process.env.REACT_APP_API_KEY;
     const _apiBase = 'https://gateway.marvel.com:443/v1/public/';
@@ -53,7 +53,16 @@ const useMarvelServices = () => {
         return _transformComicsData(result.data.results[0]);
     }
 
-    return {loading, error, removeError, request, getCharacter, getCharacterByName, getAllCharacters, getComic, getAllComics};
+    return { 
+            removeError, 
+            stateProcess, 
+            setStateProcess, 
+            getCharacter, 
+            getCharacterByName, 
+            getAllCharacters, 
+            getComic, 
+            getAllComics
+        };
 }
 
 export default useMarvelServices;
