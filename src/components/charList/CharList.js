@@ -7,6 +7,21 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './charList.scss';
 
+const setContent = (stateProcess, Component, newCharsLoading) => {
+    switch (stateProcess) {
+        case 'waiting':
+            return <Spinner />;
+        case 'loading': 
+            return newCharsLoading ? <Component /> : <Spinner />;
+        case 'confirmed':
+            return <Component />;
+        case 'error':
+            return <ErrorMessage />;
+        default:
+            throw new ErrorMessage('Unexpected state process error');
+    }
+}
+
 const CharList = (props) => {
     const [charList, setCharList] = useState([]);
     const [newCharsLoading, setNewCharsLoading] = useState(false);
@@ -15,7 +30,7 @@ const CharList = (props) => {
     
     const charRefs = useRef([]);
 
-    const {loading, error, getAllCharacters} = useMarvelServices();
+    const {stateProcess, setStateProcess, getAllCharacters} = useMarvelServices();
 
     useEffect(() => {
         onCharacterListLoadRequest(offset, true);
@@ -24,7 +39,8 @@ const CharList = (props) => {
     const onCharacterListLoadRequest = (offset, initialCharsLoad) => {
         initialCharsLoad ? setNewCharsLoading(false) : setNewCharsLoading(true);   
         getAllCharacters(offset)
-            .then(onCharacterListLoaded);
+            .then(onCharacterListLoaded)
+            .then(() => setStateProcess('confirmed'));
     }
 
     const onCharacterListLoaded = (newCharList) => {
@@ -83,16 +99,9 @@ const CharList = (props) => {
         )
     }
 
-    const renderedChars = renderCharacters(charList);
-
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const spinner = loading && !newCharsLoading ? <Spinner /> : null;
-
     return (
         <div className="char__list">
-            {errorMessage}
-            {spinner}
-            {renderedChars}
+            {setContent(stateProcess, () => renderCharacters(charList), newCharsLoading)}
             <button 
                 className="button button__main button__long"
                 disabled={newCharsLoading}
